@@ -1,5 +1,4 @@
 package it.polito.tdp.db;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -8,7 +7,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class DBConnect {
 
-	private static final String jdbcURL = "jdbc:mysql://localhost/denver_crimes";
+	private static final String jdbcURL = "jdbc:mysql://localhost/denver_crimes?serverTimezone=UTC";
 	private static HikariDataSource ds;
 	
 	public static Connection getConnection() {
@@ -17,7 +16,7 @@ public class DBConnect {
 			HikariConfig config = new HikariConfig();
 			config.setJdbcUrl(jdbcURL);
 			config.setUsername("root");
-			config.setPassword("root");
+			config.setPassword("toor");
 			
 			// configurazione MySQL
 			config.addDataSourceProperty("cachePrepStmts", "true");
