@@ -69,6 +69,12 @@ public class Model {
 		return this.distretti;
 	}
 	
+	public void simula(Integer anno, Integer mese, Integer giorno, Integer N) {
+		Simulatore sim = new Simulatore();
+		sim.init(N, anno, mese, giorno, this.grafo);
+		sim.run();
+	}
+	
 	
 
 }

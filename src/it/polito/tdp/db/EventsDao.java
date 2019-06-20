@@ -11,13 +11,16 @@ import it.polito.tdp.model.Event;
 
 public class EventsDao {
 
-	public List<Event> listAllEvents() {
-		String sql = "SELECT * FROM events";
+	public List<Event> listAllEventsByDate(Integer anno, Integer mese, Integer giorno) {
+		String sql = "SELECT * FROM events WHERE YEAR(reported_date)=? AND MONTH(reported_date)=? AND DAY(reported_date)=?";
 		try {
 			Connection conn = DBConnect.getConnection();
 
 			PreparedStatement st = conn.prepareStatement(sql);
-
+			st.setInt(1, anno);
+			st.setInt(2, mese);
+			st.setInt(3, giorno);
+			
 			List<Event> list = new ArrayList<>();
 
 			ResultSet res = st.executeQuery();
@@ -73,7 +76,7 @@ public class EventsDao {
 		try {
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement st = conn.prepareStatement(sql);
-			
+
 			st.setInt(1, anno);
 			st.setInt(2, distretto);
 			ResultSet res = st.executeQuery();
@@ -97,11 +100,11 @@ public class EventsDao {
 		try {
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement st = conn.prepareStatement(sql);
-			
+
 			st.setInt(1, anno);
 			st.setInt(2, distretto);
 			ResultSet res = st.executeQuery();
-			
+
 			if (res.next()) {
 				Double val = res.getDouble("media");
 				conn.close();
@@ -130,6 +133,29 @@ public class EventsDao {
 
 			conn.close();
 			return anni;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Integer getDistrettoMin(Integer anno) {
+		String sql = "SELECT district_id, COUNT(*) AS cnt FROM events WHERE YEAR(reported_date) = ? "
+				+ "GROUP BY district_id ORDER BY cnt ASC LIMIT 1";
+
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, anno);
+
+			ResultSet res = st.executeQuery();
+			Integer r = null;
+			if (res.next())
+				r = res.getInt("district_id");
+
+			conn.close();
+			return r;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
