@@ -2,6 +2,8 @@ package it.polito.tdp.model;
 
 import java.time.LocalDateTime;
 
+import com.javadocmd.simplelatlng.LatLng;
+
 public class Event {
 	
 	private Long incident_id;
@@ -154,6 +156,10 @@ public class Event {
 	public String toString() {
 		return "Event [incident_id=" + incident_id + ", offense_category_id=" + offense_category_id + ", reported_date="
 				+ reported_date + ", district_id=" + district_id + "]";
+	}
+
+	public LatLng getLatLng() {
+		return new LatLng(geo_lat, geo_lon);
 	}
 	
 	
