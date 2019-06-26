@@ -22,7 +22,7 @@ public class TestModel {
 		
 //		System.out.println("Distretto a minor criminalità " + model.getDistrettoMinCriminalita(2015));
 		
-		model.doSimula(19, 9, 2017, 20);
+		model.doSimula(19, 9, 2017, 50);
 	}
 
 }

@@ -92,8 +92,8 @@ public class CrimesController {
 			txtResult.setText("Valore di N non ammesso");
 			return;
 		}
-		model.doSimula(giorno, mese, anno, N);
-
+		int malGes = model.doSimula(giorno, mese, anno, N);
+		txtResult.setText("Mal gestiti: " + malGes + "\n");
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete

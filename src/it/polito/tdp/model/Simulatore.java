@@ -68,6 +68,10 @@ public class Simulatore {
 
 		Evento e;
 		while ((e = this.queue.poll()) != null) {
+			System.out.println("\nNUOVO EVENTO");
+			this.mappaCop.entrySet()
+					.forEach(a -> System.out.format("(" + a.getKey().getDistrictId() + "-" + a.getValue() + ")"));
+			System.out.println();
 			switch (e.getTipoEvento()) {
 
 				case DELITTO:
